@@ -1,3 +1,6 @@
 # python==3.12
 pandas
-ace-tools
+scikit-learn
+imblearn
+nltk
+tqdm
