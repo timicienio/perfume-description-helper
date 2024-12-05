@@ -8,4 +8,4 @@ conda activate perfume-description-helper
 pip install -r requirements.txt
 ```
 
-2. Download `data` and `dump` from [https://drive.google.com/drive/u/1/folders/0AAryh45fTXpHUk9PVA] and copy it to repo root directory (`./data`, `./dump`).
+2. Download `data` and `dump` from [https://drive.google.com/drive/folders/1w_xbKVFts0GBPH_JeBRUDld8gs-CXyXG?usp=sharing] and copy it to repo root directory (`./data`, `./dump`).
