@@ -8,17 +8,20 @@ from collections import defaultdict, Counter
 class NgramModel:
     START_TOKEN = "<s>"
 
-    def __init__(self, n, documents=None, context=None, ngram_counter=None, init=True):
+    def __init__(
+        self, n, documents=None, names=None, context=None, ngram_counter=None, init=True
+    ):
         self.n = n
         self.documents = documents
+        self.names = names
         self.context = context or defaultdict(list)
         self.ngram_counter = ngram_counter or defaultdict(int)
         if init:
             self.init_model()
 
     def init_model(self):
-        for document in self.documents:
-            self.update(document)
+        for document, name in zip(self.documents, self.names):
+            self.update(document, name)
 
     def load_pickle(self, feature, class_name):
         with open(f"../dump/{feature}_{class_name}_context.pkl", "rb") as file:
@@ -40,7 +43,9 @@ class NgramModel:
             for i in range(self.n - 1, len(tokens))
         ]
 
-    def update(self, sentence: str):
+    def update(self, sentence: str, name: str):
+        # replace name with <NAME>
+        sentence = re.sub(rf"\b{re.escape(name)}\b", "<NAME>", sentence)
         for ngram in self.get_ngrams(self.tokenize(sentence)):
             self.ngram_counter[ngram] += 1
             prev_words, target_word = ngram
@@ -62,7 +67,7 @@ class NgramModel:
             if prob_sum > r:
                 return token
 
-    def generate_text(self, token_count: int):
+    def generate_text(self, token_count: int, name: str):
         print("start generation")
         n = self.n
         prev_context = (n - 1) * [self.START_TOKEN]
@@ -77,7 +82,7 @@ class NgramModel:
                 else:
                     prev_context.append(obj)
         print("generation done")
-        return " ".join(result)
+        return " ".join(result).replace("<NAME>", name)
 
     def to_pickle(self, feature, class_name: str):
         with open(f"../dump/{feature}_{class_name}_context.pkl", "wb") as file:
