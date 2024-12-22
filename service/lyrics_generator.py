@@ -82,6 +82,7 @@ class NgramModel:
                 else:
                     prev_context.append(obj)
         print("generation done")
+        print(result)
         return " ".join(result).replace("<NAME>", name)
 
     def to_pickle(self, feature, class_name: str):
