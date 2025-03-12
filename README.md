@@ -11,7 +11,10 @@ Perfume Description Helper 是一個使用 **Naïve Bayes** 進行香水文案�
 - **Model Training / 模型訓練**：Naïve Bayes, N-gram Language Model  
 - **Feature Selection / 特徵選取**：Chi-square  
 - **Programming Language / 程式語言**：Python  
-- **Frontend / 前端展示**：Streamlit  
+- **Frontend / 前端展示**：Streamlit
+
+## Demo 影片
+- https://drive.google.com/file/d/1Lab-NQxMkePRLCLOPLeS_Z2nJUMo7I3p/view?usp=sharing
 
 ## Setting up environment
 
